@@ -47,7 +47,7 @@ A Contentful-driven mini blog built with Next.js (App Router), TypeScript, Tailw
 | `coverImage` | Media | Required |
 | `publishedDate` | Date | Required |
 
-> ![Contentful Model Screenshot](./public/contentful-model.png)
+
 
 ---
 
