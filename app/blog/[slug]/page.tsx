@@ -9,6 +9,7 @@ import Link from "next/link";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
 
 export const revalidate = 60;
+export const dynamicParams = true;
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -16,7 +17,12 @@ interface Props {
 
 export async function generateStaticParams() {
   const posts = await getPosts();
-  return posts.map((post) => ({ slug: post.slug }));
+
+  return posts
+    .filter((post) => Boolean(post.slug))
+    .map((post) => ({
+      slug: post.slug,
+    }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -72,7 +78,6 @@ export default async function BlogDetailPage({ params }: Props) {
 
   return (
     <article className="container mx-auto max-w-3xl px-4 py-12">
-      {/* Back link */}
       <Button
         asChild
         variant="ghost"
@@ -85,7 +90,6 @@ export default async function BlogDetailPage({ params }: Props) {
         </Link>
       </Button>
 
-      {/* Meta */}
       <header className="mb-8">
         <div className="mb-3">
           <Badge
@@ -101,7 +105,6 @@ export default async function BlogDetailPage({ params }: Props) {
         <p className="text-lg text-muted-foreground">{post.excerpt}</p>
       </header>
 
-      {/* Cover Image */}
       {post.coverImage && (
         <div className="relative w-full aspect-video rounded-xl overflow-hidden mb-10 border border-border">
           <Image
@@ -115,7 +118,6 @@ export default async function BlogDetailPage({ params }: Props) {
         </div>
       )}
 
-      {/* Rich Text Content */}
       <div
         className="prose prose-neutral dark:prose-invert prose-emerald max-w-none
           prose-headings:font-bold prose-headings:tracking-tight
