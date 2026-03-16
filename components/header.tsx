@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { Pencil2Icon } from "@radix-ui/react-icons";
 
 export function Header() {
   const pathname = usePathname();
@@ -17,9 +18,10 @@ export function Header() {
       <div className="container mx-auto flex h-14 max-w-5xl items-center justify-between px-4">
         <Link
           href="/"
-          className="text-lg font-bold text-emerald-600 dark:text-emerald-400 hover:opacity-80 transition-opacity"
+          className="flex items-center gap-2 text-lg font-bold text-emerald-600 dark:text-emerald-400 hover:opacity-80 transition-opacity"
         >
-          BlogApp
+          <Pencil2Icon className="h-5 w-5" />
+          Blog App
         </Link>
         <nav className="flex items-center gap-1">
           {navLinks.map(({ href, label }) => {
