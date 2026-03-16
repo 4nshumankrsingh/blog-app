@@ -11,7 +11,7 @@ import { ArrowLeftIcon } from "@radix-ui/react-icons";
 export const revalidate = 60;
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
@@ -20,7 +20,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = await getPostBySlug(params.slug);
+  const { slug } = await params;
+  const post = await getPostBySlug(slug);
 
   if (!post) {
     return {
@@ -51,7 +52,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function BlogDetailPage({ params }: Props) {
-  const post = await getPostBySlug(params.slug);
+  const { slug } = await params;
+  const post = await getPostBySlug(slug);
 
   if (!post) {
     notFound();
@@ -70,7 +72,7 @@ export default async function BlogDetailPage({ params }: Props) {
 
   return (
     <article className="container mx-auto max-w-3xl px-4 py-12">
-
+      {/* Back link */}
       <Button
         asChild
         variant="ghost"
@@ -99,7 +101,7 @@ export default async function BlogDetailPage({ params }: Props) {
         <p className="text-lg text-muted-foreground">{post.excerpt}</p>
       </header>
 
-
+      {/* Cover Image */}
       {post.coverImage && (
         <div className="relative w-full aspect-video rounded-xl overflow-hidden mb-10 border border-border">
           <Image
@@ -113,7 +115,7 @@ export default async function BlogDetailPage({ params }: Props) {
         </div>
       )}
 
-
+      {/* Rich Text Content */}
       <div
         className="prose prose-neutral dark:prose-invert prose-emerald max-w-none
           prose-headings:font-bold prose-headings:tracking-tight
