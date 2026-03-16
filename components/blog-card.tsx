@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   Card,
   CardContent,
@@ -25,7 +26,18 @@ function formatDate(dateStr: string): string {
 
 export function BlogCard({ post }: BlogCardProps) {
   return (
-    <Card className="flex flex-col h-full border-border hover:border-emerald-400 dark:hover:border-emerald-600 transition-colors">
+    <Card className="flex flex-col h-full border-border hover:border-emerald-400 dark:hover:border-emerald-600 transition-colors overflow-hidden">
+      {post.coverImage && (
+        <div className="relative w-full h-44 overflow-hidden bg-muted">
+          <Image
+            src={post.coverImage.url}
+            alt={post.coverImage.title || post.title}
+            fill
+            className="object-cover transition-transform duration-300 hover:scale-105"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          />
+        </div>
+      )}
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between gap-2 mb-2">
           <Badge

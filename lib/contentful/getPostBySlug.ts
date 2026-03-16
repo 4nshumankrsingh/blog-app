@@ -26,7 +26,8 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
         ? {
             url: `https:${imageAsset.fields.file.url}`,
             title: (imageAsset.fields.title as string) ?? "",
-            width: (imageAsset.fields.file.details as any)?.image?.width ?? 800,
+            width:
+              (imageAsset.fields.file.details as any)?.image?.width ?? 800,
             height:
               (imageAsset.fields.file.details as any)?.image?.height ?? 600,
           }
