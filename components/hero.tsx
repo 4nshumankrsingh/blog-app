@@ -4,7 +4,7 @@ import { ArrowRightIcon } from "@radix-ui/react-icons";
 
 export function Hero() {
   return (
-    <section className="bg-gradient-to-b from-emerald-50 to-white dark:from-emerald-950/20 dark:to-background py-20 px-4">
+    <section className="bg-linear-to-b from-emerald-50 to-white dark:from-emerald-950/20 dark:to-background py-20 px-4">
       <div className="container mx-auto max-w-5xl text-center">
         <span className="inline-block rounded-full bg-emerald-100 dark:bg-emerald-900/40 px-3 py-1 text-xs font-medium text-emerald-700 dark:text-emerald-300 mb-4">
           Welcome
